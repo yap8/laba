@@ -25,31 +25,58 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Главная</title>
 </head>
 <body>
 
-  <table>
-    <tr>
-      <th>Название</th>
-      <th>Страна</th>
-      <th>Год</th>
-    </tr>
-    <?php foreach($movies as $movie): ?>
-      <tr>
-        <td><?php echo $movie['title']; ?></td>
-        <td><?php echo $movie['country']; ?></td>
-        <td><?php echo $movie['year']; ?></td>
-        <td><a href="info.php?id=<?php echo $movie['id']; ?>">Подробнее</a></td>
-      </tr>
-    <?php endforeach ?>
-  </table>
+  <section>
+    <h2>Добавить новый фильм:</h2>
+    <form action="add.php" method="POST">
+      <div>
+        <input type="text" name="title" placeholder="название">
+      </div>
+      <div>
+        <input type="text" name="country" placeholder="страна">
+      </div>
+      <div>
+        <input type="number" name="year" min="1900" max="2022" value="2022">
+      </div>
+      <div>
+        <textarea name="info" placeholder="информация"></textarea>
+      </div>
+      <div>
+        <button type="submit" name="add">Отправить</button>
+      </div>
+    </form>
+  </section>
 
-  <h4>Сортировка</h4>
-  <ul>
-    <li><a href="?sort=asc">От старого к новому</a></li>
-    <li><a href="?sort=desc">От нового к старому</a></li>
-  </ul>
+  <section>
+    <h2>Фильмы</h2>
+    <table>
+      <tr>
+        <th>Название</th>
+        <th>Страна</th>
+        <th>Год</th>
+      </tr>
+      <?php foreach($movies as $movie): ?>
+        <tr>
+          <td><?php echo $movie['title']; ?></td>
+          <td><?php echo $movie['country']; ?></td>
+          <td><?php echo $movie['year']; ?></td>
+          <td><a href="info.php?id=<?php echo $movie['id']; ?>">Подробнее</a></td>
+          <td><a href="edit.php?id=<?php echo $movie['id']; ?>">Редактировать</a></td>
+        </tr>
+      <?php endforeach ?>
+    </table>
+  </section>
+
+  <section>
+    <h2>Сортировка</h2>
+    <ul>
+      <li><a href="?sort=asc">От старого к новому</a></li>
+      <li><a href="?sort=desc">От нового к старому</a></li>
+    </ul>
+  </section>
 
 </body>
 </html>
