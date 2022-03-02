@@ -7,7 +7,7 @@ if (isset($_POST['add'])){
   $year = $_POST['year'];
   $info = $_POST['info'];
 
-  $sql = "INSERT INTO movies (id, title, country, year, info) VALUES (NULL, '$title', '$country', '$year', '$info');";
+  $sql = "INSERT INTO movies (id, title, country, year, info) VALUES ('NULL', '$title', '$country', '$year', '$info');";
 
   $result = $conn->query($sql);
 }
