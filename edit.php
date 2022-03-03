@@ -1,5 +1,5 @@
 <?php
-  $conn = new mysqli('localhost', 'root', '', 'movies');
+  include_once('db.php');
 
   $id = $_GET['id'];
 

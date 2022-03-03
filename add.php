@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli('localhost', 'root', '', 'movies');
+include_once('db.php');
 
 if (isset($_POST['add'])){
   $title = $_POST['title'];
