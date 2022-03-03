@@ -48,7 +48,12 @@
       <div>
         <label>
           Страна
-          <input type="text" name="country" value="<?php echo $movie['country']; ?>">
+          <select name="country">
+            <?php $countries = json_decode(file_get_contents('countries.json'), true); ?>
+            <?php foreach ($countries as $country) { ?>
+              <option <?php echo $country['name'] === $movie['country'] ? 'selected' : '' ?>><?php echo $country['name']; ?></option>
+            <?php } ?>
+          </select>
         </label>
       </div>
       <div>

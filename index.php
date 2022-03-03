@@ -36,7 +36,12 @@
         <input type="text" name="title" placeholder="название">
       </div>
       <div>
-        <input type="text" name="country" placeholder="страна">
+        <select name="country">
+          <?php $countries = json_decode(file_get_contents('countries.json'), true); ?>
+          <?php foreach ($countries as $country) { ?>
+            <option><?php echo $country['name']; ?></option>
+          <?php } ?>
+        </select>
       </div>
       <div>
         <input type="number" name="year" min="1900" max="2022" value="2022">
