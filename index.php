@@ -70,6 +70,7 @@
           <td><?php echo $movie['year']; ?></td>
           <td><a href="info.php?id=<?php echo $movie['id']; ?>">Подробнее</a></td>
           <td><a href="edit.php?id=<?php echo $movie['id']; ?>">Редактировать</a></td>
+          <td><a href="delete.php?id=<?php echo $movie['id']; ?>">Удалить</a></td>
         </tr>
       <?php endforeach ?>
     </table>
