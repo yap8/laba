@@ -18,20 +18,24 @@
   
   $movies = $result->fetch_all(MYSQLI_ASSOC);
 
-  if ($_GET['ids']) {
-    $filteredMovies = [];
-
-    $ids = explode(',', $_GET['ids']);
-
-    foreach ($ids as $id) {
-      foreach ($movies as $movie) {
-        if ($movie['id'] === $id) {
-          array_push($filteredMovies, $movie);
+  if (isset($_GET['ids'])) {
+    if (!empty($_GET['ids'])) {
+      $filteredMovies = [];
+  
+      $ids = explode(',', $_GET['ids']);
+  
+      foreach ($ids as $id) {
+        foreach ($movies as $movie) {
+          if ($movie['id'] === $id) {
+            array_push($filteredMovies, $movie);
+          }
         }
       }
+  
+      $movies = $filteredMovies;
+    } else {
+      $movies = [];
     }
-
-    $movies = $filteredMovies;
   }
 ?>
 
@@ -94,6 +98,7 @@
         </tr>
       <?php endforeach ?>
     </table>
+    <?php if (empty($movies)) echo 'ничего не найдено' ?>
   </section>
 
   <section>
