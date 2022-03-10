@@ -15,8 +15,24 @@
   }
 
   $result = $conn->query($sql);
-
+  
   $movies = $result->fetch_all(MYSQLI_ASSOC);
+
+  if ($_GET['ids']) {
+    $filteredMovies = [];
+
+    $ids = explode(',', $_GET['ids']);
+
+    foreach ($ids as $id) {
+      foreach ($movies as $movie) {
+        if ($movie['id'] === $id) {
+          array_push($filteredMovies, $movie);
+        }
+      }
+    }
+
+    $movies = $filteredMovies;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -57,6 +73,10 @@
 
   <section>
     <h2>Фильмы</h2>
+    <form action="search.php" method="POST">
+      <input type="text" name="title" placeholder="Название">
+      <button type="submit" name="submit">Найти</button>
+    </form>
     <table>
       <tr>
         <th>Название</th>
