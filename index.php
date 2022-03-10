@@ -74,7 +74,7 @@
   <section>
     <h2>Фильмы</h2>
     <form action="search.php" method="POST">
-      <input type="text" name="title" placeholder="Название">
+      <input type="text" name="title" placeholder="Название" value="<?php echo $_GET['query']; ?>">
       <button type="submit" name="submit">Найти</button>
     </form>
     <table>

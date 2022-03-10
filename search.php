@@ -1,6 +1,12 @@
 <?php
   include_once('db.php');
 
+  $query = mb_strtolower($_POST['title']);
+
+  if ($query === '') {
+    header("Location: index.php");
+  }
+
   if (isset($_POST['submit'])) {
     $sql = "SELECT * FROM movies;";
 
@@ -8,19 +14,17 @@
 
     $movies = $result->fetch_all(MYSQLI_ASSOC);
 
-    $filter = mb_strtolower($_POST['title']);
-
     $result = [];
 
     foreach ($movies as $movie) {
       $title = mb_strtolower($movie['title']);
 
-      if (strpos($title, $filter) !== false) {
+      if (strpos($title, $query) !== false) {
         array_push($result, $movie['id']);
       }
     }
 
     $result = implode($result, ',');
 
-    header("Location: index.php?ids=$result");
+    header("Location: index.php?ids=$result&query=$query");
   }
