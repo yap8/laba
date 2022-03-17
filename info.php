@@ -24,9 +24,18 @@
 
   <h1><?php echo $movie['title']; ?></h1>
   <ul>
-    <li><?php echo $movie['country']; ?></li>
-    <li><?php echo $movie['year']; ?></li>
-    <li><?php echo $movie['info']; ?></li>
+    <li>
+      <b>Страна: </b><?php echo $movie['country']; ?>
+    </li>
+    <li>
+      <b>Год: </b><?php echo $movie['year']; ?>
+    </li>
+    <li>
+      <b>Статус: </b><?php echo $movie['status']; ?>
+    </li>
+    <li>
+      <b>Информация: </b><?php echo $movie['info']; ?>
+    </li>
   </ul>
 
   <nav>

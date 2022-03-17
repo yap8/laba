@@ -67,6 +67,13 @@
         <input type="number" name="year" min="1900" max="2022" value="2022">
       </div>
       <div>
+        <select name="status">
+          <option>анонсирован</option>
+          <option>в прокате</option>
+          <option>прокат окончен</option>
+        </select>
+      </div>
+      <div>
         <textarea name="info" placeholder="информация"></textarea>
       </div>
       <div>
@@ -86,12 +93,14 @@
         <th>Название</th>
         <th>Страна</th>
         <th>Год</th>
+        <th>Статус</th>
       </tr>
       <?php foreach($movies as $movie): ?>
         <tr>
           <td><?php echo $movie['title']; ?></td>
           <td><?php echo $movie['country']; ?></td>
           <td><?php echo $movie['year']; ?></td>
+          <td><?php echo $movie['status']; ?></td>
           <td><a href="info.php?id=<?php echo $movie['id']; ?>">Подробнее</a></td>
           <td><a href="edit.php?id=<?php echo $movie['id']; ?>">Редактировать</a></td>
           <td><a href="delete.php?id=<?php echo $movie['id']; ?>">Удалить</a></td>

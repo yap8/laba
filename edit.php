@@ -7,9 +7,10 @@
     $title = $_POST['title'];
     $country = $_POST['country'];
     $year = $_POST['year'];
+    $status = $_POST['status'];
     $info = $_POST['info'];
 
-    $sql = "UPDATE movies SET title = '$title', country = '$country', year = '$year', info = '$info' WHERE id = '$id'";
+    $sql = "UPDATE movies SET title = '$title', country = '$country', year = '$year', status = '$status', info = '$info' WHERE id = '$id'";
 
     $conn->query($sql);
 
@@ -60,6 +61,16 @@
         <label>
           Год
           <input type="number" name="year" min="1900" max="2022" value="<?php echo $movie['year']; ?>">
+        </label>
+      </div>
+      <div>
+        <label>
+          Статус
+          <select name="status">
+            <option <?php echo $movie['status'] === 'анонсирован' ? 'selected' : '' ?>>анонсирован</option>
+            <option <?php echo $movie['status'] === 'в прокате' ? 'selected' : '' ?>>в прокате</option>
+            <option <?php echo $movie['status'] === 'прокат окончен' ? 'selected' : '' ?>>прокат окончен</option>
+          </select>
         </label>
       </div>
       <div>
