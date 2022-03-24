@@ -1,7 +1,9 @@
 <?php
   include_once('db.php');
 
-  $id = $_GET['id'];
+  if (!$_COOKIE['user_id']) header('Location: login.php');
+
+  $id = $_COOKIE['user_id'];
 
   $sql = "SELECT * FROM users WHERE id='$id';";
 
@@ -28,12 +30,18 @@
 </head>
 <body>
 
-  <div class="container mt-4">
+  <div class="container mt-4 mb-4">
     <div class="row">
       <h1 class="col text-center">Привет, <?php echo $user['name']; ?></h1>
     </div>
     <div class="row">
       <div class="col text-center">Статус: <?php echo $type['name']; ?></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <a class="btn btn-danger m-auto" href="logout.php">Выйти</a>
     </div>
   </div>
 

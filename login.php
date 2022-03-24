@@ -1,6 +1,18 @@
 <?php
   include_once('db.php');
 
+  if ($_COOKIE['user_id']) {
+    $id = $_COOKIE['user_id'];
+
+    $sql = "SELECT * FROM users WHERE id='$id';";
+
+    $result = $conn->query($sql);
+
+    $user = $result->fetch_all(MYSQLI_ASSOC)[0];
+
+    if ($user) header('Location: data.php');
+  }
+
   if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $password = $_POST['password'];
@@ -11,7 +23,9 @@
 
     $user = $result->fetch_all(MYSQLI_ASSOC)[0];
 
-    header('Location: data.php?id=' . $user['id']);
+    setcookie('user_id', $user['id'], time() + (86400 * 30));
+
+    header('Location: data.php');
   }
 ?>
 
