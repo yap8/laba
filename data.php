@@ -28,8 +28,14 @@
 </head>
 <body>
 
-  <h1>Привет, <?php echo $user['name']; ?></h1>
-  <div>Статус: <?php echo $type['name']; ?></div>
+  <div class="container mt-4">
+    <div class="row">
+      <h1 class="col text-center">Привет, <?php echo $user['name']; ?></h1>
+    </div>
+    <div class="row">
+      <div class="col text-center">Статус: <?php echo $type['name']; ?></div>
+    </div>
+  </div>
 
 </body>
 </html>
