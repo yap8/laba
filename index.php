@@ -49,6 +49,19 @@
 </head>
 <body>
 
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="login.php">Вход</a>
+        </li>
+        <li>
+          <a href="register.php">Регистрация</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
   <section>
     <h2>Добавить новый фильм:</h2>
     <form action="add.php" method="POST">

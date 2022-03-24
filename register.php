@@ -36,6 +36,14 @@
       <button type="submit" name="submit">Зарегистрироваться</button>
     </div>
   </form>
+
+  <div>
+    Есть аккаунт? <a href="login.php">Вход</a>
+  </div>
+
+  <div>
+    <a href="index.php">На главную</a>
+  </div>
   
 </body>
 </html>

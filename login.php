@@ -38,6 +38,14 @@
       </button>
     </div>
   </form>
+
+  <div>
+    Нет аккаунта? <a href="register.php">Регистрация</a>
+  </div>
+
+  <div>
+    <a href="index.php">На главную</a>
+  </div>
   
 </body>
 </html>
