@@ -17,15 +17,20 @@ if (isset($_POST['submit'])) {
   $name = $_POST['name'];
   $password = $_POST['password'];
 
-  $sql = "SELECT * FROM users WHERE name='$name' AND password='$password';";
+  $sql = "SELECT * FROM users WHERE name='$name';";
 
   $result = $conn->query($sql);
 
   $user = $result->fetch_all(MYSQLI_ASSOC)[0];
 
-  setcookie('user_id', $user['id'], time() + (86400 * 30));
+  if (password_verify($password, $user["password"])) {
+    setcookie('user_id', $user['id'], time() + (86400 * 30));
 
-  header('Location: data.php');
+    header('Location: data.php');
+  } else {
+    echo "Пароль неправильный!!!<br>
+    Попробуйте еще раз!!!";
+  }
 }
 ?>
 

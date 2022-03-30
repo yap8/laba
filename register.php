@@ -15,7 +15,7 @@ if (isset($_COOKIE['user_id'])) {
 
 if (isset($_POST['submit'])) {
   $name = $_POST['name'];
-  $password = $_POST['password'];
+  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
   $reserved_name = $conn->query("SELECT name FROM users WHERE name='$name'");
 
