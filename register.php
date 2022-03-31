@@ -1,5 +1,5 @@
 <?php
-include_once('db.php');
+include_once('./partials/db.php');
 include_once('./partials/auth-redirect.php');
 
 switch ($_GET['err']) {

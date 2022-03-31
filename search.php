@@ -1,5 +1,5 @@
 <?php
-  include_once('db.php');
+  include_once('./partials/db.php');
 
   $query = mb_strtolower($_POST['title']);
 

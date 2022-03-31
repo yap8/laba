@@ -1,5 +1,5 @@
 <?php
-  include_once('db.php');
+  include_once('./partials/db.php');
   include_once('./partials/private.php');
 
   if (isset($_POST['submit'])) {
