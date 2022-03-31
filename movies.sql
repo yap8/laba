@@ -93,19 +93,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `password`, `type_id`) VALUES
-(1, 'Bodea', '123123', '2'),
-(2, 'senya', '123123', '1'),
-(3, 'asdf', '123', '1'),
-(4, '123123', '123123213', '1'),
-(5, '123123', '123123213', '1'),
-(6, 'Ars', '54321', '1'),
-(7, '1111', '1111', '1');
-
---
 -- Indexes for dumped tables
 --
 
