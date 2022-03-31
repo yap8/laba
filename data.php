@@ -10,7 +10,7 @@
   
   $user = $result->fetch_all(MYSQLI_ASSOC)[0];
 
-  if (!$user) header('Location: login.php');
+  if (!$user) return header('Location: login.php');
 
   $type_id = $user['type_id'];
 
@@ -34,7 +34,14 @@
       <h1 class="col text-center">Привет, <?php echo $user['name']; ?></h1>
     </div>
     <div class="row">
-      <div class="col text-center">Статус: <?php echo $type['name']; ?></div>
+      <div class="col text-center">
+        <ul>
+          <?php if ($user['user_name'] || $user['user_surname']) { ?>
+            <li><?php echo $user['user_name']; ?> <?php echo $user['user_surname']; ?></li>
+          <?php } ?>
+          <li>Статус: <?php echo $type['name']; ?></li>
+        </ul>
+      </div>
     </div>
   </div>
 
