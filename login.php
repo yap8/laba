@@ -1,16 +1,14 @@
 <?php
 include_once('db.php');
+include_once('./partials/auth-redirect.php');
 
-if (isset($_COOKIE['user_id'])) {
-  $id = $_COOKIE['user_id'];
-
-  $sql = "SELECT * FROM users WHERE id='$id';";
-
-  $result = $conn->query($sql);
-
-  $user = $result->fetch_all(MYSQLI_ASSOC)[0];
-
-  if ($user) header('Location: data.php');
+switch ($_GET['err']) {
+  case 'no_user':
+    echo 'Нет пользователя или имя введено неверно';
+    break;
+  case 'password':
+    echo 'Неверный пароль';
+    break;
 }
 
 if (isset($_POST['submit'])) {
@@ -23,14 +21,12 @@ if (isset($_POST['submit'])) {
 
   $user = $result->fetch_all(MYSQLI_ASSOC)[0];
 
-  if (password_verify($password, $user["password"])) {
-    setcookie('user_id', $user['id'], time() + (86400 * 30));
+  if (!$user) return header('Location: login.php?err=no_user');
+  if (!password_verify($password, $user["password"])) return header('Location: login.php?err=password');
 
-    header('Location: data.php');
-  } else {
-    echo "Пароль неправильный!!!<br>
-    Попробуйте еще раз!!!";
-  }
+  setcookie('user_id', $user['id'], time() + (86400 * 30));
+
+  header('Location: data.php');
 }
 ?>
 

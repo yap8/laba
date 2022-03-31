@@ -1,7 +1,6 @@
 <?php
   include_once('db.php');
-
-  if (!$_COOKIE['user_id']) header('Location: login.php');
+  include_once('./partials/private.php');
 
   $id = $_COOKIE['user_id'];
 
@@ -41,7 +40,10 @@
 
   <div class="container">
     <div class="row">
-      <a class="btn btn-danger m-auto" href="logout.php">Выйти</a>
+      <div class="col">
+        <a class="btn btn-danger" href="logout.php">Выйти</a>
+        <a class="btn btn-warning" href="update.php">Обновление</a>
+      </div>
     </div>
   </div>
 
