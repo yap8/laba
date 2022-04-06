@@ -1,32 +1,34 @@
 <?php
-  include_once('./partials/db.php');
-  include_once('./partials/private.php');
+include_once('./partials/db.php');
+include_once('./partials/private.php');
 
-  $id = $_COOKIE['user_id'];
+$id = $_COOKIE['user_id'];
 
-  $sql = "SELECT * FROM users WHERE id='$id';";
+$sql = "SELECT * FROM users WHERE id='$id';";
 
-  $result = $conn->query($sql);
-  
-  $user = $result->fetch_all(MYSQLI_ASSOC)[0];
+$result = $conn->query($sql);
 
-  if (!$user) return header('Location: login.php');
+$user = $result->fetch_all(MYSQLI_ASSOC)[0];
 
-  $type_id = $user['type_id'];
+if (!$user) return header('Location: login.php');
 
-  $sql = "SELECT * FROM types WHERE id='$type_id';";
+$type_id = $user['type_id'];
 
-  $result = $conn->query($sql);
+$sql = "SELECT * FROM types WHERE id='$type_id';";
 
-  $type = $result->fetch_all(MYSQLI_ASSOC)[0];
+$result = $conn->query($sql);
+
+$type = $result->fetch_all(MYSQLI_ASSOC)[0];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <?php include_once('partials/head.php'); ?>
   <title>Привет</title>
 </head>
+
 <body>
 
   <div class="container mt-4 mb-4">
@@ -48,11 +50,14 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <a class="btn btn-danger" href="logout.php">Выйти</a>
         <a class="btn btn-warning" href="update.php">Обновление</a>
+        <a class="btn btn-warning" href="index.php">На главную</a>
+        <br>
+        <a class="btn btn-danger" href="logout.php">Выйти</a>
       </div>
     </div>
   </div>
 
 </body>
+
 </html>

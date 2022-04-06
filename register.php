@@ -2,7 +2,7 @@
 include_once('./partials/db.php');
 include_once('./partials/auth-redirect.php');
 
-switch ($_GET['err']) {
+switch (isset($_GET['err'])) {
   case 'password':
     echo 'Пароли не совпадают';
     break;

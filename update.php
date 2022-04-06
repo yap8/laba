@@ -1,26 +1,28 @@
 <?php
-  include_once('./partials/db.php');
-  include_once('./partials/private.php');
+include_once('./partials/db.php');
+include_once('./partials/private.php');
 
-  if (isset($_POST['submit'])) {
-    $user_id = $_COOKIE['user_id'];
-    $user_name = $_POST['user-name'];
-    $user_surname = $_POST['user-surname'];
+if (isset($_POST['submit'])) {
+  $user_id = $_COOKIE['user_id'];
+  $user_name = $_POST['user-name'];
+  $user_surname = $_POST['user-surname'];
 
-    $sql = "UPDATE users SET user_name='$user_name', user_surname='$user_surname' WHERE id='$user_id';";
+  $sql = "UPDATE users SET user_name='$user_name', user_surname='$user_surname' WHERE id='$user_id';";
 
-    $result = $conn->query($sql);
+  $result = $conn->query($sql);
 
-    header('Location: data.php');
-  }
+  header('Location: data.php');
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <?php include_once('partials/head.php'); ?>
   <title>Обновить данные пользователя</title>
 </head>
+
 <body>
 
   <div class="container">
@@ -41,7 +43,9 @@
         </button>
       </div>
     </form>
+    <a class="btn btn-warning" href="data.php">Профиль</a>
   </div>
-  
+
 </body>
+
 </html>

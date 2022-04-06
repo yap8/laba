@@ -1,97 +1,69 @@
 <?php
-  include_once('./partials/db.php');
+include_once('./partials/db.php');
+include_once('./partials/private.php');
 
-  $sql = "SELECT * FROM movies";
+$id = $_COOKIE['user_id'];
 
-  if (isset($_GET['sort'])) {
-    switch($_GET['sort']) {
-      case 'asc':
-        $sql = "SELECT * FROM movies ORDER BY year ASC;";
-        break;
-      case 'desc':
-        $sql = "SELECT * FROM movies ORDER BY year DESC;";
-        break;
-    }
+$result = $conn->query("SELECT * FROM users WHERE id='$id';");
+
+$user = $result->fetch_all(MYSQLI_ASSOC)[0];
+
+$sql = "SELECT * FROM movies";
+
+if (isset($_GET['sort'])) {
+  switch ($_GET['sort']) {
+    case 'asc':
+      $sql = "SELECT * FROM movies ORDER BY year ASC;";
+      break;
+    case 'desc':
+      $sql = "SELECT * FROM movies ORDER BY year DESC;";
+      break;
   }
+}
 
-  $result = $conn->query($sql);
-  
-  $movies = $result->fetch_all(MYSQLI_ASSOC);
+$result = $conn->query($sql);
 
-  if (isset($_GET['ids'])) {
-    if (!empty($_GET['ids'])) {
-      $filteredMovies = [];
-  
-      $ids = explode(',', $_GET['ids']);
-  
-      foreach ($ids as $id) {
-        foreach ($movies as $movie) {
-          if ($movie['id'] === $id) {
-            array_push($filteredMovies, $movie);
-          }
+$movies = $result->fetch_all(MYSQLI_ASSOC);
+
+if (isset($_GET['ids'])) {
+  if (!empty($_GET['ids'])) {
+    $filteredMovies = [];
+
+    $ids = explode(',', $_GET['ids']);
+
+    foreach ($ids as $id) {
+      foreach ($movies as $movie) {
+        if ($movie['id'] === $id) {
+          array_push($filteredMovies, $movie);
         }
       }
-  
-      $movies = $filteredMovies;
-    } else {
-      $movies = [];
     }
+
+    $movies = $filteredMovies;
+  } else {
+    $movies = [];
   }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <?php include_once('partials/head.php'); ?>
   <title>Главная</title>
 </head>
+
 <body>
 
-  <header>
-    <nav>
-      <ul>
-        <li>
-          <a href="login.php">Вход</a>
-        </li>
-        <li>
-          <a href="register.php">Регистрация</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <a class="btn btn-warning" href="data.php">Профиль</a>
 
-  <section>
-    <h2>Добавить новый фильм:</h2>
-    <form action="add.php" method="POST">
-      <div>
-        <input type="text" name="title" placeholder="название">
-      </div>
-      <div>
-        <select name="country">
-          <?php $countries = json_decode(file_get_contents('countries.json'), true); ?>
-          <?php foreach ($countries as $country) { ?>
-            <option><?php echo $country['name']; ?></option>
-          <?php } ?>
-        </select>
-      </div>
-      <div>
-        <input type="number" name="year" min="1900" max="2022" value="2022">
-      </div>
-      <div>
-        <select name="status">
-          <option>анонсирован</option>
-          <option>в прокате</option>
-          <option>прокат окончен</option>
-        </select>
-      </div>
-      <div>
-        <textarea name="info" placeholder="информация"></textarea>
-      </div>
-      <div>
-        <button type="submit" name="add">Отправить</button>
-      </div>
-    </form>
-  </section>
+  <?php
+  if ($user['type_id'] == 2) {
+    include_once('partials/add_new_movie.php');
+  }
+  ?>
+
 
   <section>
     <h2>Фильмы</h2>
@@ -106,15 +78,17 @@
         <th>Год</th>
         <th>Статус</th>
       </tr>
-      <?php foreach($movies as $movie): ?>
+      <?php foreach ($movies as $movie) : ?>
         <tr>
           <td><?php echo $movie['title']; ?></td>
           <td><?php echo $movie['country']; ?></td>
           <td><?php echo $movie['year']; ?></td>
           <td><?php echo $movie['status']; ?></td>
           <td><a href="info.php?id=<?php echo $movie['id']; ?>">Подробнее</a></td>
-          <td><a href="edit.php?id=<?php echo $movie['id']; ?>">Редактировать</a></td>
-          <td><a href="delete.php?id=<?php echo $movie['id']; ?>">Удалить</a></td>
+          <?php if ($user['type_id'] == 2) {
+            include('partials/admin_panel.php');
+          }
+          ?>
         </tr>
       <?php endforeach ?>
     </table>
@@ -128,6 +102,7 @@
       <li><a href="?sort=desc">От нового к старому</a></li>
     </ul>
   </section>
-
+  <a class="btn btn-danger" href="logout.php">Выйти</a>
 </body>
+
 </html>
