@@ -20,25 +20,30 @@
 </head>
 <body>
 
-  <h1><?php echo $movie['title']; ?></h1>
-  <ul>
-    <li>
-      <b>Страна: </b><?php echo $movie['country']; ?>
-    </li>
-    <li>
-      <b>Год: </b><?php echo $movie['year']; ?>
-    </li>
-    <li>
-      <b>Статус: </b><?php echo $movie['status']; ?>
-    </li>
-    <li>
-      <b>Информация: </b><?php echo $movie['info']; ?>
-    </li>
-  </ul>
-
-  <nav>
-    <a href="index.php">На главную</a>
-  </nav>
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"><?php echo $movie['title']; ?></h1>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <b>Страна: </b><?php echo $movie['country']; ?>
+        </li>
+        <li class="list-group-item">
+          <b>Год: </b><?php echo $movie['year']; ?>
+        </li>
+        <li class="list-group-item">
+          <b>Статус: </b><?php echo $movie['status']; ?>
+        </li>
+        <li class="list-group-item">
+          <b>Информация: </b><?php echo $movie['info']; ?>
+        </li>
+      </ul>
+    </div>
+    <nav>
+      <a href="index.php">На главную</a>
+    </nav>
+  </div>
 
 </body>
 </html>
