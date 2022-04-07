@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
 
 <body>
 
-  <div class="container">
+  <div class="container mt-4">
     <h1 class="text-center">Обновить пользовательские данные</h1>
   </div>
 

@@ -32,18 +32,20 @@ $type = $result->fetch_all(MYSQLI_ASSOC)[0];
 <body>
 
   <div class="container mt-4 mb-4">
-    <div class="row">
-      <h1 class="col text-center">Привет, <?php echo $user['name']; ?></h1>
-    </div>
-    <div class="row">
-      <div class="col text-center">
-        <ul>
-          <?php if ($user['user_name'] || $user['user_surname']) { ?>
-            <li><?php echo $user['user_name']; ?> <?php echo $user['user_surname']; ?></li>
-          <?php } ?>
-          <li>Статус: <?php echo $type['name']; ?></li>
-        </ul>
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title">Привет, <?php echo $user['name']; ?></h1>
       </div>
+      <ul class="list-group list-group-flush">
+        <?php if ($user['user_name'] || $user['user_surname']) { ?>
+          <li class="list-group-item">
+            <?php echo $user['user_name']; ?> <?php echo $user['user_surname']; ?>
+          </li>
+        <?php } ?>
+        <li class="list-group-item">
+          Статус: <?php echo $type['name']; ?>
+        </li>
+      </ul>
     </div>
   </div>
 
@@ -51,8 +53,7 @@ $type = $result->fetch_all(MYSQLI_ASSOC)[0];
     <div class="row">
       <div class="col">
         <a class="btn btn-warning" href="update.php">Обновление</a>
-        <a class="btn btn-warning" href="index.php">На главную</a>
-        <br>
+        <a class="btn btn-primary" href="index.php">На главную</a>
         <a class="btn btn-danger" href="logout.php">Выйти</a>
       </div>
     </div>
