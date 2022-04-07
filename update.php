@@ -7,8 +7,19 @@ $user_id = $_COOKIE['user_id'];
 if (isset($_POST['submit'])) {
   $user_name = $_POST['user-name'];
   $user_surname = $_POST['user-surname'];
+  $user_avatar = $_POST['avatar'];
 
-  $sql = "UPDATE users SET user_name='$user_name', user_surname='$user_surname' WHERE id='$user_id';";
+  $tmp_name = $_FILES['avatar']['tmp_name'];
+  $file_type = strtolower(pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION));
+  $name = 'uploads/' . uniqid() . '.' . $file_type;
+
+  if ($file_type != "jpg" && $file_type != "png" && $file_type != "jpeg" ) {
+    return header('Location: update.php');
+  }
+
+  move_uploaded_file($_FILES["avatar"]["tmp_name"], $name);
+
+  $sql = "UPDATE users SET user_name='$user_name', user_surname='$user_surname', avatar='$name' WHERE id='$user_id';";
 
   $result = $conn->query($sql);
 
@@ -19,10 +30,7 @@ $sql = "SELECT * FROM users WHERE id='$user_id';";
 
 $result = $conn->query($sql);
 
-$formData = $result->fetch_all(MYSQLI_ASSOC)[0];
-
-$user_name = $formData['user_name'];
-$user_surname = $formData['user_surname'];
+$user = $result->fetch_all(MYSQLI_ASSOC)[0];
 ?>
 
 <!DOCTYPE html>
@@ -40,17 +48,20 @@ $user_surname = $formData['user_surname'];
   </div>
 
   <div class="container mt-4">
-    <form action="update.php" method="POST">
+    <form action="update.php" method="POST" enctype="multipart/form-data">
       <div class="form-group row">
         <div class="col col-sm-3 m-auto">
-          <input type="file" class="form-control-file">
+          <label>
+            <img style="width: 10rem; margin: auto; cursor: pointer;" src="<?php echo $user['avatar']; ?>">
+            <input type="file" class="form-control-file" name="avatar">
+          </label>
         </div>
       </div>
       <div class="form-group row">
-        <input class="form-control col-sm-3 m-auto" type="text" placeholder="Имя" name="user-name" value="<?php echo $user_name; ?>">
+        <input class="form-control col-sm-3 m-auto" type="text" placeholder="Имя" name="user-name" value="<?php echo $user['user_name']; ?>">
       </div>
       <div class="form-group row">
-        <input class="form-control col-sm-3 m-auto" type="text" placeholder="Фамилия" name="user-surname" value="<?php echo $user_surname; ?>">
+        <input class="form-control col-sm-3 m-auto" type="text" placeholder="Фамилия" name="user-surname" value="<?php echo $user['user_surname']; ?>">
       </div>
       <div class="form-group row">
         <button class="btn btn-primary col-sm-3 m-auto" type="submit" name="submit">
