@@ -42,6 +42,11 @@ $user_surname = $formData['user_surname'];
   <div class="container mt-4">
     <form action="update.php" method="POST">
       <div class="form-group row">
+        <div class="col col-sm-3 m-auto">
+          <input type="file" class="form-control-file">
+        </div>
+      </div>
+      <div class="form-group row">
         <input class="form-control col-sm-3 m-auto" type="text" placeholder="Имя" name="user-name" value="<?php echo $user_name; ?>">
       </div>
       <div class="form-group row">
