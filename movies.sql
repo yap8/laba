@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 30, 2022 at 04:53 PM
+-- Generation Time: Apr 07, 2022 at 11:50 AM
 -- Server version: 5.5.62
 -- PHP Version: 7.1.33
 
@@ -89,8 +89,20 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type_id` char(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1'
+  `type_id` char(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
+  `user_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_surname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'uploads/default.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `password`, `type_id`, `user_name`, `user_surname`, `avatar`) VALUES
+(21, 'Bodea', '$2y$10$hiD92AhXFr6p3QDbbvKl.uiS2WwTmHmk6Z/ZnOoigqxmzsETSy7yC', '2', '', 'Фамилия', 'uploads/default.jpg'),
+(22, 'Bodea111', '$2y$10$xuasbDhxBFnqiJySy9BbUOc77T0hra6Tzhi0uDjjGuBsd9JCwJJeW', '1', '', '', 'uploads/default.jpg'),
+(23, 'Bodea1', '$2y$10$QGCdJb14nTqzwzAZBckRHeLWQS0JefJjnZU9HtiT5eieyolB/EOQW', '1', '123123123', '', 'uploads/default.jpg');
 
 --
 -- Indexes for dumped tables
@@ -134,7 +146,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

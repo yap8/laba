@@ -33,7 +33,7 @@ $type = $result->fetch_all(MYSQLI_ASSOC)[0];
   
   <div class="container mt-4 mb-4">
     <div class="card">
-      <img style="width: 10rem; margin: auto;" src="uploads/default.jpg">
+      <img style="width: 10rem; margin: auto;" src="<?php echo $user['avatar']; ?>">
       <div class="card-body">
         <h1 class="card-title text-center">Привет, <?php echo $user['name']; ?></h1>
       </div>
