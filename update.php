@@ -2,8 +2,9 @@
 include_once('./partials/db.php');
 include_once('./partials/private.php');
 
+$user_id = $_COOKIE['user_id'];
+
 if (isset($_POST['submit'])) {
-  $user_id = $_COOKIE['user_id'];
   $user_name = $_POST['user-name'];
   $user_surname = $_POST['user-surname'];
 
@@ -13,6 +14,15 @@ if (isset($_POST['submit'])) {
 
   header('Location: data.php');
 }
+
+$sql = "SELECT * FROM users WHERE id='$user_id';";
+
+$result = $conn->query($sql);
+
+$formData = $result->fetch_all(MYSQLI_ASSOC)[0];
+
+$user_name = $formData['user_name'];
+$user_surname = $formData['user_surname'];
 ?>
 
 <!DOCTYPE html>
@@ -32,10 +42,10 @@ if (isset($_POST['submit'])) {
   <div class="container mt-4">
     <form action="update.php" method="POST">
       <div class="form-group row">
-        <input class="form-control col-sm-3 m-auto" type="text" placeholder="Имя" name="user-name">
+        <input class="form-control col-sm-3 m-auto" type="text" placeholder="Имя" name="user-name" value="<?php echo $user_name; ?>">
       </div>
       <div class="form-group row">
-        <input class="form-control col-sm-3 m-auto" type="text" placeholder="Фамилия" name="user-surname">
+        <input class="form-control col-sm-3 m-auto" type="text" placeholder="Фамилия" name="user-surname" value="<?php echo $user_surname; ?>">
       </div>
       <div class="form-group row">
         <button class="btn btn-primary col-sm-3 m-auto" type="submit" name="submit">
